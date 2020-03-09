@@ -6,7 +6,7 @@ from tool import Sub_Counts
 # parse command line args
 parser = argparse.ArgumentParser()
 parser.description = "此文件用于字幕统计"
-parser.add_argument("-input_path", default=r'D:\PythonProject\Sub_Code\data', help="path to input dataset")
+parser.add_argument("-input_path", default=r'D:\PythonProject\Sub_Code\data\Salem.S01E03.720p.HDTV.X264-DIMENSION.简体&英文.srt', help="path to input dataset")
 parser.add_argument("-save_path",  default=r'D:\PythonProject\Sub_Code\save', help="path to output save")
 args = parser.parse_args()
 
