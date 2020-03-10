@@ -2,6 +2,7 @@ import os
 import re
 import datetime
 import chardet
+import xlwt
 
 
 class Sub_Counts(object):
@@ -50,8 +51,9 @@ class Sub_Counts(object):
                 self.log(err_note)
             # else:
             #     self.log(f'N-File <{file}> is not the specified type ! ')
-        self.save_txt(filenames=self.file_names, files_path=self.files_path, types=self.str_types,
-                      frequency=self.word_freq)
+        # self.save_txt(filenames=self.file_names, files_path=self.files_path, types=self.str_types,
+        #               frequency=self.word_freq)
+        self.save_xls()
         self.log(f'文件保存成功!\t本次运行结果：{len(self.word_freq)} subtitle files were processed\t'
                 f'{file_cannot_read} subtitle files cannot read\t\n')
 
@@ -67,6 +69,32 @@ class Sub_Counts(object):
                 writer.write('英文词频：' + str(frequency[index]) + '\n')
                 writer.write('\n')
         print('Output file is saved！')
+
+    def save_xls(self):
+        save_filename = self.get_time_str()
+        save_filename += '.xls'
+        workbook = xlwt.Workbook()
+        sheet = workbook.add_sheet("Sheet1")
+        sheet.col(0).width = 12000
+        sheet.col(1).width = 20000
+        sheet.col(2).width = 3000
+        sheet.col(3).width = 3000
+        title_style = xlwt.XFStyle()
+        title_style.font.bold = True
+        title_style.font.height = 20*12
+        title_style.alignment.horz = 2
+        sheet.write(0, 0, "文件名", title_style)
+        sheet.write(0, 1, "文件路径", title_style)
+        sheet.write(0, 2, "字幕类型", title_style)
+        sheet.write(0, 3, "词频", title_style)
+        for index in range(len(self.file_names)):
+            sheet.write(index+1, 0, self.file_names[index-1])
+            sheet.write(index+1, 1, self.files_path[index-1])
+            sheet.write(index+1, 2, self.str_types[index-1])
+            sheet.write(index+1, 3, float(self.word_freq[index-1]))
+        workbook.save(os.path.join(self.save_path, save_filename))
+        print('Output file is saved！')
+
 
     def log(self, notes):
         with open(self.log_path, 'a') as writer:

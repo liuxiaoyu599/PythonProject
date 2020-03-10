@@ -156,9 +156,6 @@ def start_counts():
         scr_tree_y = tk.Scrollbar(window_treeview, command=treeview.yview)
         treeview.config(yscrollcommand=scr_tree_y.set)
         scr_tree_y.pack(side='right', fill='y')
-        scr_tree_x = tk.Scrollbar(window_treeview, command=treeview.xview)
-        treeview.config(yscrollcommand=scr_tree_x.set)
-        scr_tree_x.pack(side='bottom', fill='x')
 
         treeview.pack(side='left', expand=1, fill='both')
 
@@ -172,10 +169,10 @@ def start_counts():
             l.sort(reverse=reverse)
             for index, (val, k) in enumerate(l):
                 tv.move(k, '', index)
-            tv.heading(col, command=lambda: treeview_sort_column(tv,col, not reverse))
+            tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))
 
         for col in columns:
-            treeview.heading(col, text=col, command=lambda _col=col:treeview_sort_column(treeview, _col, False))
+            treeview.heading(col, text=col, command=lambda _col=col: treeview_sort_column(treeview, _col, False))
 
 
 def thread_it(func, *args):
