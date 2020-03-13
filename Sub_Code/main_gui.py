@@ -161,7 +161,7 @@ def start_counts():
 
         # display
         for i in range(len(sub.files_path)):
-            treeview.insert('', i, value=(i, sub.files_path[i], sub.str_types[i], sub.word_freq[i]))
+            treeview.insert('', i, value=(i, sub.files_path[i], sub.str_types[i], float(sub.word_freq[i])))
 
         # 自动排序
         def treeview_sort_column(tv, col, reverse):
@@ -217,4 +217,5 @@ btn_quit = tk.Button(window, text='退    出', font=('微软雅黑', 12), comma
 btn_quit.place(x=450, y=520)
 
 
-window.mainloop()
+if __name__ == '__main__':
+    window.mainloop()
