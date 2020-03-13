@@ -1,7 +1,6 @@
-import datetime
 import os
 import re
-
+import datetime
 import chardet
 import xlwt
 
@@ -95,6 +94,7 @@ class Sub_Counts(object):
             sheet.write(index+1, 3, float(self.word_freq[index-1]))
         workbook.save(os.path.join(self.save_path, save_filename))
         print('Output file is saved！')
+
 
     def log(self, notes):
         with open(self.log_path, 'a') as writer:
